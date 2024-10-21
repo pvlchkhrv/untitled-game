@@ -1,4 +1,4 @@
-import { getGridSize } from '../../../core/state-manger.js';
+import { getGridSize, subscribe } from '../../../core/state-manger.js';
 import { CellComponent } from './cell/cell.component.js';
 
 export const GridComponent = () => {
@@ -6,12 +6,14 @@ export const GridComponent = () => {
 
     element.classList.add('grid');
 
+    subscribe(() => render(element));
     render(element);
 
     return { element };
 };
 
 async function render(element) {
+    element.innerHTML = '';
     const gridSize = await getGridSize(element);
 
     for (let y = 0; y < gridSize.rowsCount; y++) {

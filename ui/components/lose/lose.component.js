@@ -1,4 +1,4 @@
-import { start } from '../../../core/state-manger.js';
+import { playAgain } from '../../../core/state-manger.js';
 
 export const LoseComponent = () => {
     const element = document.createElement('div');
@@ -15,7 +15,7 @@ async function render(element) {
     const btn = document.createElement('button');
     btn.append('Play again');
 
-    btn.addEventListener('click', (event) => start())
+    btn.addEventListener('click', (event) => playAgain())
 
     element.append(titleElement, btn);
 }

@@ -9,8 +9,8 @@ const _state = {
             rowsCount: 4,
             columnsCount: 5,
         },
-        pointsToLose: 5,
-        pointsToWin: 5,
+        pointsToLose: 3,
+        pointsToWin: 3,
     },
     positions: {
         google: { x: 2, y: 3 },
@@ -69,13 +69,14 @@ export const getGameStatus = async () => {
 };
 
 export const start = () => {
-    _state.gameState = GAME_STATUS.IN_PROGRESS;
     _state.positions.players[0] = { x: 0, y: 0 };
     _state.positions.players[1] = {
         x: _state.settings.gridSize.columnsCount - 1,
         y: _state.settings.gridSize.rowsCount - 1
     };
     _jumpGoogleToNewPosition();
+
+    _state.points = { google: 0, players: [0, 0] };
 
     googleJumpInterval = setInterval(() => {
         _jumpGoogleToNewPosition();
@@ -87,6 +88,13 @@ export const start = () => {
         }
         _notifyObservers();
     }, _state.settings.googleJumpIntervalInMs);
+
+    _state.gameState = GAME_STATUS.IN_PROGRESS;
+    _notifyObservers();
+};
+
+export const playAgain = () => {
+    _state.gameState = GAME_STATUS.SETTINGS;
     _notifyObservers();
 };
 // </INTERFACE>
