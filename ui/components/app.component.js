@@ -8,12 +8,10 @@ import { StartComponent } from './start/start.component.js';
 
 export const AppComponent = () => {
     const localState = { prevStatus: null, cleanUps: [] };
-    console.log('app created');
     const element = document.createElement('div');
 
     subscribe(() => render(element, localState));
     render(element, localState);
-
 
     return { element };
 };
@@ -24,7 +22,6 @@ async function render(element, localState) {
     if (localState.prevStatus === status) return;
     localState.prevStatus = status;
 
-    console.log('AppComponent render')
     localState.cleanUps.forEach(cleanUp => cleanUp());
     localState.cleanUps = [];
 

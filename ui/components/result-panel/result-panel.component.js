@@ -1,8 +1,14 @@
 import { getGooglePoints, getPlayerPoints, subscribe, unsubscribe } from '../../../core/state-manger.js';
+import { EVENTS } from '../../../core/constants.js';
 
 export const ResultPanelComponent = () => {
     const element = document.createElement('div');
-    const observer = () => render(element);
+    const observer = (e) => {
+        if (e.name === EVENTS.POINTS_CHANGED) {
+            render(element)
+        }
+    };
+
     element.classList.add('result-panel');
 
     subscribe(observer);
