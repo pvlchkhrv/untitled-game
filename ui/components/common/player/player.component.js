@@ -3,7 +3,7 @@ export function PlayerComponent(playerNumber) {
 
     render(element, playerNumber);
 
-    return { element };
+    return { element, cleanUp: () => {} };
 }
 
 async function render(element, playerNumber) {

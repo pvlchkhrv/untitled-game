@@ -3,7 +3,7 @@ export const SettingsComponent = () => {
 
     render(element);
 
-    return { element };
+    return { element, cleanUp: () => {} };
 };
 
 async function render(element) {

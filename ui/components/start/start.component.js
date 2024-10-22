@@ -5,7 +5,7 @@ export const StartComponent = () => {
 
     render(element);
 
-    return { element };
+    return { element, cleanUp: () => {} };
 };
 
 async function render(element) {

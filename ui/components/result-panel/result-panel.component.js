@@ -1,14 +1,14 @@
-import { getGooglePoints, getPlayerPoints, subscribe } from '../../../core/state-manger.js';
+import { getGooglePoints, getPlayerPoints, subscribe, unsubscribe } from '../../../core/state-manger.js';
 
 export const ResultPanelComponent = () => {
     const element = document.createElement('div');
-
+    const observer = () => render(element);
     element.classList.add('result-panel');
 
-    subscribe(() => render(element));
+    subscribe(observer);
     render(element);
 
-    return { element };
+    return { element, cleanUp: () => unsubscribe(observer) };
 };
 
 async function render(element) {

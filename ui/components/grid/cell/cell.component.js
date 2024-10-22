@@ -7,7 +7,7 @@ export function CellComponent(x, y) {
 
     render(element, x, y);
 
-    return { element };
+    return { element, cleanUp: () => {} };
 }
 
 async function render(element, x, y) {

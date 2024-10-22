@@ -69,6 +69,10 @@ export const getGameStatus = async () => {
 };
 
 export const start = () => {
+    if (_state.gameState !== GAME_STATUS.SETTINGS) {
+        throw new Error(`Invalid transition from ${_state.gameState}`);
+    }
+
     _state.positions.players[0] = { x: 0, y: 0 };
     _state.positions.players[1] = {
         x: _state.settings.gridSize.columnsCount - 1,
@@ -94,6 +98,10 @@ export const start = () => {
 };
 
 export const playAgain = () => {
+    if (_state.gameState !== GAME_STATUS.WIN && _state.gameState !== GAME_STATUS.LOSE) {
+        throw new Error(`Invalid transition from ${_state.gameState}`);
+    }
+
     _state.gameState = GAME_STATUS.SETTINGS;
     _notifyObservers();
 };
